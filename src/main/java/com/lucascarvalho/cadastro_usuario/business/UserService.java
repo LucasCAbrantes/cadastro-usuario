@@ -1,14 +1,15 @@
 package com.lucascarvalho.cadastro_usuario.business;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lucascarvalho.cadastro_usuario.business.exception.ObjectNotFoundException;
 import com.lucascarvalho.cadastro_usuario.infrastructure.entities.User;
 import com.lucascarvalho.cadastro_usuario.infrastructure.repositories.UserRepository;
 
+@Service
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
@@ -17,7 +18,7 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public void save(User user) {
+	public void insert(User user) {
 		userRepository.saveAndFlush(user);
 	}
 	
@@ -32,7 +33,7 @@ public class UserService {
 	public User update(User user) {
 		User newU = findById(user.getId());
 		updateUser(newU, user);
-		return userRepository.save(newU);
+		return userRepository.saveAndFlush(newU);
 	}
 
 	private void updateUser(User newU, User user) {
