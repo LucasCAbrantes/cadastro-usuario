@@ -18,8 +18,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public void insert(User user) {
-		userRepository.saveAndFlush(user);
+	public User insert(User user) {
+		return userRepository.saveAndFlush(user);
 	}
 	
 	public User findById(Long id) {
