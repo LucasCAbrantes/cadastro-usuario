@@ -28,10 +28,10 @@ public class Equip implements Serializable{
 		
 	}
 
-	public Equip(Long id, String name, Boolean Status) {
-		
+	public Equip(Long id, String name, Boolean status) {
 		this.id = id;
 		this.name = name;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -78,7 +78,7 @@ public class Equip implements Serializable{
 		Equip other = (Equip) obj;
 		return Objects.equals(id, other.id);
 	}
-
+	
 	
 	
 	
