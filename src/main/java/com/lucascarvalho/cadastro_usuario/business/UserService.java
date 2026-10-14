@@ -30,15 +30,19 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
-	public User update(User user) {
-		User newU = findById(user.getId());
-		updateUser(newU, user);
+	public User update(Long id, User user) {
+		User newU = findById(id);
+		updateData(newU, user);
 		return userRepository.saveAndFlush(newU);
 	}
 
-	private void updateUser(User newU, User user) {
-		newU.setName(user.getName());
-		newU.setEmail(user.getEmail());
+	private void updateData(User newU, User user) {
+		if(user.getName()!= null) {
+			newU.setName(user.getName());
+		}
 		
+		if(user.getEmail()!= null) {
+		newU.setEmail(user.getEmail());
+		}
 	}
 }
