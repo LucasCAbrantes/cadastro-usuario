@@ -1,16 +1,18 @@
 package com.lucascarvalho.cadastro_usuario.infrastructure.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "equips")
 public class Equip implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -18,14 +20,15 @@ public class Equip implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private Boolean status;
 	
-	private List<User> users = new ArrayList<>();
+	private Set<User> users = new HashSet<>();
 	
 	public Equip() {
 		
 	}
 
-	public Equip(Long id, String name) {
+	public Equip(Long id, String name, Boolean Status) {
 		
 		this.id = id;
 		this.name = name;
@@ -47,8 +50,16 @@ public class Equip implements Serializable{
 		this.name = name;
 	}
 
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
+	}
+	
+	public Boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override
@@ -67,6 +78,8 @@ public class Equip implements Serializable{
 		Equip other = (Equip) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 }
