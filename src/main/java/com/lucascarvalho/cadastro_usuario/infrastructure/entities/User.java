@@ -1,12 +1,19 @@
 package com.lucascarvalho.cadastro_usuario.infrastructure.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
@@ -20,6 +27,11 @@ public class User implements Serializable{
 	private Long id;
 	private String name;
 	private String email;
+	
+	@ManyToMany
+	@JoinTable(name = "user_equip" , joinColumns = @JoinColumn(name = "user_id "), inverseJoinColumns = @JoinColumn(name = "equip_id") )
+	@JsonIgnoreProperties("users")
+	private Set<Equip> equips = new HashSet<>();
 	
 	public User() {
 		
@@ -54,6 +66,10 @@ public class User implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Set<Equip> getEquips() {
+		return equips;
 	}
 
 	@Override

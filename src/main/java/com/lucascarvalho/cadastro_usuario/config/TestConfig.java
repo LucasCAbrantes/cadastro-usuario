@@ -21,8 +21,8 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		equipRepository.deleteAll();
 		userRepository.deleteAll();
+		equipRepository.deleteAll();
 		
 		User maria = new User(null,"Maria Silva" ,"maria@gmail.com");
 		User pedro = new User(null,"Pedro Costa" ,"pedro@gmail.com");
@@ -34,9 +34,15 @@ public class TestConfig implements CommandLineRunner{
 		Equip equip2 = new Equip(null, "Pastoral da Acolhida" , true);
 		
 		equip1.getUsers().addAll(Arrays.asList(maria, jose));
-		equip2.getUsers().addAll(Arrays.asList(pedro));
+		equip2.getUsers().addAll(Arrays.asList(pedro, maria));
 		
 		equipRepository.saveAll(Arrays.asList(equip1,equip2));
+		
+		maria.getEquips().addAll(Arrays.asList(equip1, equip2));
+		jose.getEquips().addAll(Arrays.asList(equip1));
+		pedro.getEquips().addAll(Arrays.asList(equip2));
+		
+		userRepository.saveAll(Arrays.asList(maria,pedro,jose));
 		
 	}
 

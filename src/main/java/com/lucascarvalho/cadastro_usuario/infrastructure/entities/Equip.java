@@ -5,10 +5,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +25,8 @@ public class Equip implements Serializable{
 	private String name;
 	private Boolean status;
 	
+	@ManyToMany(mappedBy = "equips")
+	@JsonIgnoreProperties("equips")
 	private Set<User> users = new HashSet<>();
 	
 	public Equip() {
